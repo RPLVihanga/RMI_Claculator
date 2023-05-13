@@ -11,21 +11,21 @@ public class MyCalculator extends UnicastRemoteObject implements Calculator {
 
     @Override
     public int addTwoIntegers(int x, int y) throws RemoteException {
-        return (x+y) ;
+        return x+y ;
     }
 
     @Override
     public int subtractTwoIntegers(int x, int y) throws RemoteException {
-        return (x-y);
+        return x-y;
     }
 
     @Override
     public int multiplyTwoIntegers(int x, int y) throws RemoteException {
-        return (x*y);
+        return x*y;
     }
 
     @Override
     public int divideTwoIntegers(int x, int y) throws RemoteException,ArithmeticException {
-        return (x/y);
+        return x/y;
     }
 }

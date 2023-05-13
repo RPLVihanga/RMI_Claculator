@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 
 public class MyClient {
     public static void main(String[] args) {
@@ -15,17 +16,46 @@ public class MyClient {
             //2. Locating the remote object
             Calculator myCal = (Calculator) myReg.lookup("MyCalculatorServer");
             //3. Invoke the methods
-            int addition = myCal.addTwoIntegers(12,20);
-            System.out.println("Addition of Two Numbers : "+addition);
+            Scanner scanner = new Scanner(System.in);
 
-            int subtraction = myCal.subtractTwoIntegers(12,20);
-            System.out.println("Subtract of Two Numbers : "+subtraction);
+            System.out.println("Java RMI Calculator");
+            System.out.println("Available Operations");
+            System.out.println("1. Add");
+            System.out.println("2. Subtract");
+            System.out.println("3. Multiply");
+            System.out.println("4. Divide");
+            System.out.println("Enter operation number: ");
 
-            int multiplication = myCal.multiplyTwoIntegers(12,20);
-            System.out.println("Multiply of Two Numbers : "+multiplication);
+            int op =scanner.nextInt();
 
-            int division = myCal.divideTwoIntegers(12,0);
-            System.out.println("Divide of Two Numbers : "+division);
+            System.out.println("Enter the first number: ");
+            int x = scanner.nextInt();
+
+            System.out.println("Enter the second number: ");
+            int y = scanner.nextInt();
+
+            int result = 0;
+
+            switch (op){
+                case 1:
+                    result=myCal.addTwoIntegers(x,y);
+                    break;
+                case 2:
+                    result=myCal.subtractTwoIntegers(x,y);
+                    break;
+                case 3:
+                    result=myCal.multiplyTwoIntegers(x,y);
+                    break;
+                case 4:
+                    result=myCal.divideTwoIntegers(x,y);
+                    break;
+                default:
+                    System.out.println("Invalid operation");
+                    System.exit(1);
+            }
+
+            System.out.println("Result is : " +result);
+            scanner.close();
 
         } catch (RemoteException e) {
             System.out.println("Exception in Client..."+ e.getMessage());
